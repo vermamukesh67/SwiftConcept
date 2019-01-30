@@ -14,6 +14,18 @@ struct Planett
     let distanceFromSun: Double
 }
 
+extension Array {
+    
+        func mapUsingReduce<OutElement>(_ closure: (_ item: Iterator.Element) -> OutElement) -> [OutElement]
+        {
+            return self.reduce([]) { (partial, item) in
+                return partial + [closure(item)]
+        }
+        
+    }
+}
+
+
 class Seat
 {
   weak var flight : Flight?
@@ -60,12 +72,12 @@ class SynTaxViewController: UIViewController {
     var computedPropertyAsObserver : (Int) = 0
     {
         willSet(newValue) {
-            print("new value = \(computedPropertyAsObserver)")
-            print("new value = \(newValue)")
+           // print("new value = \(computedPropertyAsObserver)")
+           // print("new value = \(newValue)")
         }
         
         didSet {
-            print("new value = \(computedPropertyAsObserver)")
+           // print("new value = \(computedPropertyAsObserver)")
         }
     }
     
@@ -84,10 +96,55 @@ class SynTaxViewController: UIViewController {
         }
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+         print("coder")
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+         print("awakeFromNib")
+    }
+    
+    override func loadView() {
+        super.loadView()
+        print("loadView")
+    }
+    
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        print("loadViewIfNeeded")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+    }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("viewDidLayoutSubviews")
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("viewWillLayoutSubviews")
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("viewDidLoad")
         let planets = [
             
             Planett(name: "Mars", distanceFromSun: 1.52),
@@ -95,6 +152,11 @@ class SynTaxViewController: UIViewController {
             Planett(name: "Saturn", distanceFromSun: 9.38),
             Planett(name: "Neptune", distanceFromSun: 0.1)
         ]
+        
+     let testArray = planets.mapUsingReduce { (item) -> Planett in
+            print(item)
+            return item
+        }
         
         let result1 = planets.reduce(0) {
               $0 + $1.distanceFromSun
@@ -104,13 +166,13 @@ class SynTaxViewController: UIViewController {
             $0.name
         }
         
-        print("result1 = \(result1)")
-        print("result1 = \(result2)")
+        //print("result1 = \(result1)")
+       // print("result1 = \(result2)")
 
         // Do any additional setup after loading the view.
         
-        print("global int = \(globalInt)")
-        print("global string = \(globalStr) ")
+        //print("global int = \(globalInt)")
+       // print("global string = \(globalStr) ")
         
         printMyAgeValue()
         printMyName(myName: "Hello")
@@ -126,13 +188,13 @@ class SynTaxViewController: UIViewController {
     
     deinit
     {
-        print("controller is not available")
+       // print("controller is not available")
     }
     
     func AddTwoObjects<T:addableProtocol>(first : T , second: T) -> T
     {
         let finalString = first + second
-        print("Final string after append is = \(finalString)")
+       // print("Final string after append is = \(finalString)")
         return finalString
     }
     
@@ -144,26 +206,26 @@ class SynTaxViewController: UIViewController {
         let intAge = Int(myAge)
         if let age = intAge
         {
-           print("my age = \(age)")
+          // print("my age = \(age)")
         }
         else
         {
-           print("my age = \(String(describing: intAge))")
+          // print("my age = \(String(describing: intAge))")
         }
         
         guard let age1 = intAge else {
-            print("age not available")
+          //  print("age not available")
             return
         }
         
-        print("my age using guard = \(age1)")
+      //  print("my age using guard = \(age1)")
         
     }
     
    
     func printMyName(myName : String)
     {
-        print("My name is \(myName)")
+        //print("My name is \(myName)")
     }
     
     func printMyAddress()
@@ -173,7 +235,7 @@ class SynTaxViewController: UIViewController {
         Saral Dreamz, Flora Hotel\
         Vastral- 382418, Ahmedabad
         """
-        print(myAddress)
+       //print(myAddress)
     }
     
     func printFullName(firstName: String, lastName: String) -> String
@@ -221,36 +283,36 @@ class SynTaxViewController: UIViewController {
     func printVagitablsName() // Array
     {
         var arrVagitables = ["Patato", "Ladies finger", "Cocumber"]
-        print("all vegitables are = \(arrVagitables)")
+       // print("all vegitables are = \(arrVagitables)")
         
         arrVagitables[1] = "Bringle"
-        print("all vegitables are = \(arrVagitables)")
+       // print("all vegitables are = \(arrVagitables)")
         
         arrVagitables.remove(at: 0)
         
-         print("all vegitables are = \(arrVagitables)")
+        // print("all vegitables are = \(arrVagitables)")
         
         arrVagitables.append("Carrot")
         
-        print("all vegitables are = \(arrVagitables)")
+        //print("all vegitables are = \(arrVagitables)")
         
         arrVagitables.insert("Bitt", at: 1)
         
-        print("all vegitables are = \(arrVagitables)")
+       // print("all vegitables are = \(arrVagitables)")
         
         for strVag in arrVagitables
         {
-            print(strVag)
+           // print(strVag)
         }
         
         for (index, strVag) in arrVagitables.enumerated()
         {
-            print("vegitable at \(index) is \(strVag)")
+            //print("vegitable at \(index) is \(strVag)")
         }
         
         for index in 0...arrVagitables.count-1
         {
-            print(arrVagitables[index])
+           // print(arrVagitables[index])
         }
         
     }
@@ -259,19 +321,19 @@ class SynTaxViewController: UIViewController {
     {
         let touple = (name : "Varma Mukesh", age:27)
         
-        print(touple.name)
-        print(touple.1)
+       // print(touple.name)
+       // print(touple.1)
     }
     
     func printYourBioData()
     {
         var objDicc = ["firstName":"Mukesh", "lastName":"Varma"]
         
-        print(objDicc["firstName"] ?? "No Value")
+        //print(objDicc["firstName"] ?? "No Value")
         
         objDicc.updateValue("Male", forKey: "gender")
         
-        print(objDicc.debugDescription)
+       // print(objDicc.debugDescription)
         
         objDicc.removeValue(forKey: "firstName")
     }
@@ -281,15 +343,15 @@ class SynTaxViewController: UIViewController {
         switch (caseValue)
         {
             case "y":
-            print("Yello")
+          //  print("Yello")
             fallthrough
             
             case "r":
-            print("red")
+           // print("red")
             break
             
             case "b":
-            print("blue")
+           // print("blue")
             break
             
             default :
@@ -316,7 +378,7 @@ class SynTaxViewController: UIViewController {
 
         }
         
-        print(computedMiddle)
+        //print(computedMiddle)
         
        
         
@@ -324,7 +386,7 @@ class SynTaxViewController: UIViewController {
     }
     func printValueUsingSubscript()
     {
-        print(self[0])
+       // print(self[0])
     }
 
     /*

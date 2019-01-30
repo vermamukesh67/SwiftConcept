@@ -17,32 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
-        var arrar1 = [1,2,2,2,5]
-        var arr2 = arrar1
-        arr2.append(6)
-        var len = arrar1.count
-        
-        
-        let value1:Int = 1
-        let value2:UInt = 1
-
-
-        let value3:Double = 3.14
-        var result = value1 + Int(value3) as Int + Int(value2) as Int
-        
-        print(result)
-        
-        var x = 2
-        
-        repeat {
-            
-            x *= x * 2
-            
-        } while x<100
-        
-        print(x)
-        
         // Override point for customization after application launch.
         return true
     }
